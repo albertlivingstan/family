@@ -85,7 +85,7 @@ const Hero = () => {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="mb-6"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-[var(--font-secondary)] font-semibold tracking-wide mb-6 cursor-default">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-[var(--font-secondary)] font-semibold tracking-wide mb-6 cursor-default leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-rose-400 to-amber-500 drop-shadow-sm hover:opacity-80 transition-opacity duration-300">
               Happy 25th
             </span>
@@ -100,7 +100,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="text-2xl md:text-4xl text-gray-700 font-light mb-8 font-[var(--font-secondary)]"
+          className="text-xl sm:text-2xl md:text-4xl text-gray-700 font-light mb-8 font-[var(--font-secondary)]"
         >
           Gnana Kumar & Jemima Pushpavathy <br /> <span className="text-xl text-pink-600 mt-2 block">(GJ Family)</span>
         </motion.div>

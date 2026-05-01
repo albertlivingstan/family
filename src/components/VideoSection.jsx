@@ -13,15 +13,15 @@ const VideoSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="glass-panel bg-white/10 p-10 md:p-16 rounded-3xl border border-white/20 shadow-2xl"
+          className="glass-panel bg-white/10 p-8 md:p-16 rounded-3xl border border-white/20 shadow-2xl mx-2 md:mx-0"
         >
-          <HeartHandshake className="w-16 h-16 mx-auto text-amber-400 mb-6" />
+          <HeartHandshake className="w-12 h-12 md:w-16 md:h-16 mx-auto text-amber-400 mb-4 md:mb-6" />
           
-          <h2 className="text-4xl md:text-5xl font-[var(--font-secondary)] text-white mb-8 font-semibold tracking-wide drop-shadow-md">
+          <h2 className="text-3xl md:text-5xl font-[var(--font-secondary)] text-white mb-6 md:mb-8 font-semibold tracking-wide drop-shadow-md">
             Our Promise of Forever
           </h2>
           
-          <p className="text-xl md:text-3xl font-light italic leading-relaxed text-pink-100 drop-shadow-sm font-[var(--font-secondary)]">
+          <p className="text-lg md:text-3xl font-light italic leading-relaxed text-pink-100 drop-shadow-sm font-[var(--font-secondary)]">
             "Through all the seasons of life, the laughter, and the tears, our love has only grown deeper. Twenty-five years is just the beginning of our forever."
           </p>
           

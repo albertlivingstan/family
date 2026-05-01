@@ -114,19 +114,19 @@ const SlideshowPage = () => {
         {/* Navigation Arrows */}
         <button 
           onClick={prevSlide}
-          className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 text-white hover:bg-white/30 backdrop-blur-md transition-all z-40 hover:scale-110"
+          className="absolute left-2 md:left-12 top-1/2 -translate-y-1/2 p-2 md:p-4 rounded-full bg-white/10 text-white hover:bg-white/30 backdrop-blur-md transition-all z-40 hover:scale-110"
         >
-          <ChevronLeft size={36} />
+          <ChevronLeft className="w-8 h-8 md:w-9 md:h-9" />
         </button>
         <button 
           onClick={nextSlide}
-          className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 p-4 rounded-full bg-white/10 text-white hover:bg-white/30 backdrop-blur-md transition-all z-40 hover:scale-110"
+          className="absolute right-2 md:right-12 top-1/2 -translate-y-1/2 p-2 md:p-4 rounded-full bg-white/10 text-white hover:bg-white/30 backdrop-blur-md transition-all z-40 hover:scale-110"
         >
-          <ChevronRight size={36} />
+          <ChevronRight className="w-8 h-8 md:w-9 md:h-9" />
         </button>
 
         {/* Bottom Caption Area */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-center z-40">
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 bg-gradient-to-t from-black/90 via-black/50 to-transparent text-center z-40">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -135,7 +135,7 @@ const SlideshowPage = () => {
               exit={{ y: -20, opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-white text-3xl md:text-5xl font-[var(--font-secondary)] drop-shadow-lg mb-4">
+              <h2 className="text-white text-2xl md:text-5xl font-[var(--font-secondary)] drop-shadow-lg mb-2 md:mb-4 px-4">
                 {slides[currentIndex].caption}
               </h2>
             </motion.div>
