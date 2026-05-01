@@ -10,7 +10,6 @@ const initialWishes = [
 const Wishes = () => {
   const [wishes, setWishes] = useState(initialWishes);
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
   
   const [showThankYou, setShowThankYou] = useState(false);
@@ -20,12 +19,11 @@ const Wishes = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() && message.trim() && phone.trim()) {
-      const newWish = { id: Date.now().toString(), name, phone, message };
+    if (name.trim() && message.trim()) {
+      const newWish = { id: Date.now().toString(), name, message };
       setWishes([newWish, ...wishes]);
       setSubmittedName(name);
       setName('');
-      setPhone('');
       setMessage('');
       
       // Show professional thank you message
@@ -98,18 +96,6 @@ const Wishes = () => {
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white"
                 placeholder="John & Jane Doe"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-              <input 
-                type="tel" 
-                id="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white"
-                placeholder="+1 (234) 567-8900"
                 required
               />
             </div>

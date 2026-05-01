@@ -8,7 +8,8 @@ const events = [
     title: 'The Wedding Day',
     description: 'Surrounded by our loved ones, we tied the knot and began our beautiful journey as a married couple.',
     icon: <PartyPopper size={24} />,
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg'
+    image: 'image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg'
+
   },
   {
     year: '2010',
@@ -22,7 +23,7 @@ const events = [
     title: 'Unforgettable Adventures',
     description: 'Traveling the world together and collecting memories that will last a lifetime.',
     icon: <Gem size={24} />,
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg'
+    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg'
   },
   {
     year: '2026',
@@ -75,9 +76,9 @@ const Timeline = () => {
                   <h3 className="text-2xl font-[var(--font-secondary)] text-gray-800 mb-3">{event.title}</h3>
                   <p className="text-gray-600 mb-4">{event.description}</p>
                   <div className="rounded-xl overflow-hidden relative group border border-pink-100 shadow-sm bg-pink-50/20">
-                    <img 
-                      src={event.image} 
-                      alt={event.title} 
+                    <img
+                      src={event.image}
+                      alt={event.title}
                       className="w-full h-auto block transform group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>

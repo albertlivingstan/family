@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const slides = [
   {
     image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.36.51.jpeg',
-    caption: 'Our First Vacation Together in Paris'
+    caption: 'Precious early moments watching our little one grow'
   },
   {
     image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07.jpeg',
