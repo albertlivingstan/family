@@ -67,21 +67,62 @@ const Wishes = () => {
           <h2 className="text-3xl md:text-4xl font-[var(--font-secondary)] text-gray-800 mb-6">Leave a Wish</h2>
           <p className="text-gray-600 mb-8">We'd love to hear from our friends and family on this special day!</p>
           
+          {/* Interactive Thank You Modal */}
           <AnimatePresence>
             {showThankYou && (
               <motion.div 
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="absolute top-0 left-0 right-0 bg-green-100 border-b border-green-200 p-4 flex items-start gap-3 z-20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+                onClick={() => setShowThankYou(false)}
               >
-                <CheckCircle2 className="text-green-600 shrink-0 mt-0.5" size={20} />
-                <div>
-                  <h4 className="text-green-800 font-medium">Thank You, {submittedName}!</h4>
-                  <p className="text-green-700 text-sm mt-1">
+                <motion.div
+                  initial={{ scale: 0.8, y: 50 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.8, y: 50 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-white rounded-3xl p-8 md:p-12 max-w-lg w-full text-center shadow-2xl relative overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-pink-50/50"></div>
+                  
+                  {/* Floating Hearts */}
+                  <motion.div className="absolute top-12 left-12 text-pink-400 text-2xl" animate={{ y: [0, -40], opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity }} >❤️</motion.div>
+                  <motion.div className="absolute top-20 right-16 text-pink-300 text-3xl" animate={{ y: [0, -50], opacity: [0, 1, 0] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }} >💖</motion.div>
+                  <motion.div className="absolute bottom-32 left-16 text-pink-400 text-xl" animate={{ y: [0, -30], opacity: [0, 1, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: 1 }} >💕</motion.div>
+
+                  {/* Teddy Bear Animation */}
+                  <motion.div 
+                    className="text-7xl md:text-8xl mb-6 relative z-10 cursor-pointer"
+                    whileHover={{ scale: 1.1 }}
+                    animate={{ 
+                      rotate: [0, 15, -15, 15, -15, 0],
+                      y: [0, -15, 0, -15, 0]
+                    }}
+                    transition={{ 
+                      duration: 2.5, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    🧸
+                  </motion.div>
+                  
+                  <h3 className="text-3xl md:text-4xl font-[var(--font-secondary)] text-gray-800 mb-4 relative z-10">
+                    Thank You, {submittedName}!
+                  </h3>
+                  
+                  <p className="text-gray-600 text-lg relative z-10 leading-relaxed mb-8">
                     We have lovingly received your beautiful wish. Your kind words mean the world to us on our special day. Thank you so much for your blessings!
                   </p>
-                </div>
+
+                  <button
+                    onClick={() => setShowThankYou(false)}
+                    className="bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 px-8 rounded-full transition-colors relative z-10 shadow-lg shadow-pink-500/30 hover:scale-105 transform duration-300"
+                  >
+                    Close
+                  </button>
+                </motion.div>
               </motion.div>
             )}
           </AnimatePresence>
