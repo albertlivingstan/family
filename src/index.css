@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-romantic-pink: #fdf2f8;
+  --color-romantic-gold: #d4af37;
+  --color-romantic-rose: #fecdd3;
+  --font-primary: 'Outfit', sans-serif;
+  --font-secondary: 'Playfair Display', serif;
+}
+
+@layer base {
+  body {
+    @apply bg-pink-50 text-gray-800 antialiased overflow-x-hidden;
+  }
+}
+
+.glass-panel {
+  @apply bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_32px_0_rgba(212,175,55,0.15)] transition-all duration-300 hover:shadow-[0_8px_40px_0_rgba(212,175,55,0.25)];
+}
+
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: #fecdd3;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .timeline-line::before {
+    left: 24px;
+    transform: none;
+  }
+}
+
+.my-masonry-grid {
+  display: flex;
+  margin-left: -16px;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf2f8; 
+}
+::-webkit-scrollbar-thumb {
+  background: #fbcfe8; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f9a8d4; 
+}
