@@ -11,7 +11,7 @@ const Wishes = () => {
   const [wishes, setWishes] = useState(initialWishes);
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
-  
+
   const [showThankYou, setShowThankYou] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
   const [lastDeleted, setLastDeleted] = useState(null);
@@ -25,7 +25,7 @@ const Wishes = () => {
       setSubmittedName(name);
       setName('');
       setMessage('');
-      
+
       // Show professional thank you message
       setShowThankYou(true);
       setTimeout(() => setShowThankYou(false), 6000);
@@ -37,7 +37,7 @@ const Wishes = () => {
     setLastDeleted(wishToDelete);
     setDeletedIndex(index);
     setWishes(wishes.filter(w => w.id !== id));
-    
+
     // Auto clear the undo option after 10 seconds
     setTimeout(() => {
       setLastDeleted(null);
@@ -56,7 +56,7 @@ const Wishes = () => {
   return (
     <section className="py-24 bg-white relative">
       <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-start">
-        
+
         {/* Form Section */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -66,11 +66,11 @@ const Wishes = () => {
         >
           <h2 className="text-3xl md:text-4xl font-[var(--font-secondary)] text-gray-800 mb-6">Leave a Wish</h2>
           <p className="text-gray-600 mb-8">We'd love to hear from our friends and family on this special day!</p>
-          
+
           {/* Interactive Thank You Modal */}
           <AnimatePresence>
             {showThankYou && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -85,33 +85,33 @@ const Wishes = () => {
                   className="bg-white rounded-3xl p-6 md:p-12 max-w-[95vw] md:max-w-lg w-full text-center shadow-2xl relative overflow-hidden max-h-[90vh] overflow-y-auto"
                 >
                   <div className="absolute inset-0 bg-pink-50/50"></div>
-                  
+
                   {/* Floating Hearts */}
                   <motion.div className="absolute top-6 md:top-12 left-6 md:left-12 text-pink-400 text-xl md:text-2xl" animate={{ y: [0, -40], opacity: [0, 1, 0] }} transition={{ duration: 2, repeat: Infinity }} >❤️</motion.div>
                   <motion.div className="absolute top-12 md:top-20 right-8 md:right-16 text-pink-300 text-2xl md:text-3xl" animate={{ y: [0, -50], opacity: [0, 1, 0] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }} >💖</motion.div>
                   <motion.div className="absolute bottom-20 md:bottom-32 left-8 md:left-16 text-pink-400 text-lg md:text-xl" animate={{ y: [0, -30], opacity: [0, 1, 0] }} transition={{ duration: 1.8, repeat: Infinity, delay: 1 }} >💕</motion.div>
 
                   {/* Teddy Bear Animation */}
-                  <motion.div 
+                  <motion.div
                     className="text-6xl md:text-8xl mb-4 md:mb-6 relative z-10 cursor-pointer mt-4 md:mt-0"
                     whileHover={{ scale: 1.1 }}
-                    animate={{ 
+                    animate={{
                       rotate: [0, 15, -15, 15, -15, 0],
                       y: [0, -15, 0, -15, 0]
                     }}
-                    transition={{ 
-                      duration: 2.5, 
+                    transition={{
+                      duration: 2.5,
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
                   >
                     🧸
                   </motion.div>
-                  
+
                   <h3 className="text-2xl md:text-4xl font-[var(--font-secondary)] text-gray-800 mb-3 md:mb-4 relative z-10">
                     Thank You, {submittedName}!
                   </h3>
-                  
+
                   <p className="text-gray-600 text-base md:text-lg relative z-10 leading-relaxed mb-6 md:mb-8 px-2 md:px-0">
                     We have lovingly received your beautiful wish. Your kind words mean the world to us on our special day. Thank you so much for your blessings!
                   </p>
@@ -130,19 +130,19 @@ const Wishes = () => {
           <form onSubmit={handleSubmit} className="space-y-6 mt-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white"
-                placeholder="John & Jane Doe"
+                placeholder="Enter your name"
                 required
               />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
-              <textarea 
+              <textarea
                 id="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -152,7 +152,7 @@ const Wishes = () => {
                 required
               ></textarea>
             </div>
-            <button 
+            <button
               type="submit"
               className="w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-3 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg shadow-pink-500/30"
             >
@@ -171,7 +171,7 @@ const Wishes = () => {
         >
           <div className="flex items-center justify-between mb-6 sticky top-0 bg-white/80 backdrop-blur-sm py-2 z-10">
             <h2 className="text-3xl md:text-4xl font-[var(--font-secondary)] text-gray-800">Guestbook</h2>
-            
+
             <AnimatePresence>
               {lastDeleted && (
                 <motion.button
@@ -186,10 +186,10 @@ const Wishes = () => {
               )}
             </AnimatePresence>
           </div>
-          
+
           <AnimatePresence>
             {wishes.map((wish, index) => (
-              <motion.div 
+              <motion.div
                 key={wish.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -201,8 +201,8 @@ const Wishes = () => {
                 <p className="text-gray-700 mb-4 italic pr-8">"{wish.message}"</p>
                 <div className="flex justify-between items-end">
                   <p className="text-pink-600 font-medium">— {wish.name}</p>
-                  
-                  <button 
+
+                  <button
                     onClick={() => handleDelete(wish.id, index)}
                     className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all p-2 rounded-full hover:bg-red-50"
                     title="Delete Wish"

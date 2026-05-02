@@ -8,8 +8,7 @@ const events = [
     title: 'The Wedding Day',
     description: 'Surrounded by our loved ones, we tied the knot and began our beautiful journey as a married couple.',
     icon: <PartyPopper size={24} />,
-    image: 'image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg'
-
+    image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg'
   },
   {
     year: '2010',
@@ -26,11 +25,25 @@ const events = [
     image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg'
   },
   {
+    year: '2019',
+    title: 'Memorable Moments',
+    description: 'Cherishing our beautiful time together.',
+    icon: <Heart size={24} />,
+    image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png'
+  },
+  {
+    year: '2020',
+    title: 'A Special Year',
+    description: 'More wonderful memories added to our beautiful journey.',
+    icon: <Heart size={24} />,
+    image: '/image/WhatsApp%20Image%202026-04-23%20at%2010.59.01%20(1).jpeg'
+  },
+  {
     year: '2026',
     title: 'Silver Jubilee',
     description: 'Celebrating 25 beautiful years of togetherness. Here is to a lifetime more of love and happiness.',
     icon: <CalendarHeart size={24} />,
-    image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png'
+    image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.32.03.jpeg'
   }
 ];
 

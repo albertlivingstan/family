@@ -4,30 +4,31 @@ import { ChevronLeft, ChevronRight, Home, Play, Pause } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const slides = [
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.36.51.jpeg',
-    caption: 'Precious early moments watching our little one grow'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07.jpeg',
-    caption: 'The Day We Said Yes'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08.jpeg',
-    caption: 'Building Our Dream Home'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg',
-    caption: 'Creating Beautiful Memories Together'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.14.23.jpeg',
-    caption: 'Our Growing Family'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg',
-    caption: 'Adventures Around the World'
-  }
+  { image: '/image/00c511d9-26e2-4e34-9196-ba9e4ed421cd.png', caption: 'A moment to remember' },
+  { image: '/image/Gemini_Generated_Image_1zg97m1zg97m1zg9.png', caption: 'Beautiful Art' },
+  { image: '/image/Gemini_Generated_Image_ju1ip9ju1ip9ju1i.png', caption: 'Aesthetic Creation' },
+  { image: '/image/WhatsApp%20Image%202026-04-23%20at%2010.59.01%20(1).jpeg', caption: 'Special Memory' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.10.jpeg', caption: 'Joyful Times' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11%20(1).jpeg', caption: 'Togetherness' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11%20(2).jpeg', caption: 'Happy Moments' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11.jpeg', caption: 'Smiles and Laughter' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.12.jpeg', caption: 'Unforgettable Day' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.34.52.jpeg', caption: 'Our Beautiful Life' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.36.51.jpeg', caption: 'Precious early moments watching our little one grow' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07%20(1).jpeg', caption: 'A Sweet Memory' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07.jpeg', caption: 'The Day We Said Yes' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08%20(1).jpeg', caption: 'Cherished Forever' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08.jpeg', caption: 'Building Our Dream Home' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg', caption: 'Creating Beautiful Memories Together' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.14.23.jpeg', caption: 'Our Growing Family' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg', caption: 'Adventures Around the World' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.30.34.jpeg', caption: 'Love and Happiness' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.32.03.jpeg', caption: 'Silver Jubilee Celebration' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.32.47.jpeg', caption: 'Always Together' },
+  { image: '/image/c322a959-10be-4165-90b6-30bec84e1948.png', caption: 'A Timeless Moment' },
+  { image: '/image/d64ea043-86c0-46b4-901d-cbb4733cf9af.png', caption: 'Elegant Memory' },
+  { image: '/image/e390edc1-5358-4d28-a722-315aa1e4985f.png', caption: 'Golden Years' },
+  { image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png', caption: 'A Wonderful Journey' }
 ];
 
 const SlideshowPage = () => {
@@ -142,7 +143,7 @@ const SlideshowPage = () => {
           </AnimatePresence>
 
           {/* Dots */}
-          <div className="flex justify-center gap-3 mt-6">
+          <div className="flex justify-center gap-2 md:gap-3 mt-6 flex-wrap max-w-3xl mx-auto">
             {slides.map((_, idx) => (
               <button
                 key={idx}
@@ -152,8 +153,8 @@ const SlideshowPage = () => {
                 }}
                 className={`transition-all rounded-full ${
                   idx === currentIndex 
-                    ? 'bg-amber-400 w-10 h-2.5 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
-                    : 'bg-white/40 hover:bg-white/80 w-2.5 h-2.5'
+                    ? 'bg-amber-400 w-8 md:w-10 h-2 md:h-2.5 shadow-[0_0_10px_rgba(251,191,36,0.8)]' 
+                    : 'bg-white/40 hover:bg-white/80 w-2 md:w-2.5 h-2 md:h-2.5'
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />

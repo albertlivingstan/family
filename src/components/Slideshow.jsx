@@ -3,18 +3,31 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.36.51.jpeg',
-    caption: 'Precious early moments watching our little one grow'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07.jpeg',
-    caption: 'The Day We Said Yes'
-  },
-  {
-    image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08.jpeg',
-    caption: 'Building Our Dream Home'
-  }
+  { image: '/image/00c511d9-26e2-4e34-9196-ba9e4ed421cd.png', caption: 'A moment to remember' },
+  { image: '/image/Gemini_Generated_Image_1zg97m1zg97m1zg9.png', caption: 'Beautiful Art' },
+  { image: '/image/Gemini_Generated_Image_ju1ip9ju1ip9ju1i.png', caption: 'Aesthetic Creation' },
+  { image: '/image/WhatsApp%20Image%202026-04-23%20at%2010.59.01%20(1).jpeg', caption: 'Special Memory' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.10.jpeg', caption: 'Joyful Times' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11%20(1).jpeg', caption: 'Togetherness' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11%20(2).jpeg', caption: 'Happy Moments' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.11.jpeg', caption: 'Smiles and Laughter' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.12.jpeg', caption: 'Unforgettable Day' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.34.52.jpeg', caption: 'Our Beautiful Life' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.36.51.jpeg', caption: 'Precious early moments watching our little one grow' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07%20(1).jpeg', caption: 'A Sweet Memory' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.07.jpeg', caption: 'The Day We Said Yes' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08%20(1).jpeg', caption: 'Cherished Forever' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.08.jpeg', caption: 'Building Our Dream Home' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2009.55.09.jpeg', caption: 'Creating Beautiful Memories Together' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.14.23.jpeg', caption: 'Our Growing Family' },
+  { image: '/image/WhatsApp%20Image%202026-05-01%20at%2010.22.02.jpeg', caption: 'Adventures Around the World' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.30.34.jpeg', caption: 'Love and Happiness' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.32.03.jpeg', caption: 'Silver Jubilee Celebration' },
+  { image: '/image/WhatsApp%20Image%202026-05-02%20at%2010.32.47.jpeg', caption: 'Always Together' },
+  { image: '/image/c322a959-10be-4165-90b6-30bec84e1948.png', caption: 'A Timeless Moment' },
+  { image: '/image/d64ea043-86c0-46b4-901d-cbb4733cf9af.png', caption: 'Elegant Memory' },
+  { image: '/image/e390edc1-5358-4d28-a722-315aa1e4985f.png', caption: 'Golden Years' },
+  { image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png', caption: 'A Wonderful Journey' }
 ];
 
 const Slideshow = () => {
@@ -81,13 +94,13 @@ const Slideshow = () => {
           </button>
 
           {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-wrap justify-center gap-1.5 md:gap-2 w-[90%] md:w-auto">
             {slides.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-2.5 h-2.5 rounded-full transition-all ${
-                  idx === currentIndex ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/80'
+                className={`w-1.5 md:w-2.5 h-1.5 md:h-2.5 rounded-full transition-all ${
+                  idx === currentIndex ? 'bg-white w-4 md:w-8' : 'bg-white/50 hover:bg-white/80'
                 }`}
               />
             ))}
