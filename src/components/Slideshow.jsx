@@ -27,7 +27,8 @@ const slides = [
   { image: '/image/c322a959-10be-4165-90b6-30bec84e1948.png', caption: 'A Timeless Moment' },
   { image: '/image/d64ea043-86c0-46b4-901d-cbb4733cf9af.png', caption: 'Elegant Memory' },
   { image: '/image/e390edc1-5358-4d28-a722-315aa1e4985f.png', caption: 'Golden Years' },
-  { image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png', caption: 'A Wonderful Journey' }
+  { image: '/image/f115e7be-ed96-4f4e-9dbf-8ee2b4c322c2.png', caption: 'A Wonderful Journey' },
+  { image: 'public/image/84c5fb4a-600a-49f1-8fc5-7e8229e01546.png', caption: 'golden memory ' }
 ];
 
 const Slideshow = () => {
@@ -49,7 +50,7 @@ const Slideshow = () => {
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-[var(--font-secondary)] text-gray-800">Journey Through Time</h2>
         </div>
-        
+
         <div className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl group">
           <AnimatePresence mode="wait">
             <motion.div
@@ -60,14 +61,14 @@ const Slideshow = () => {
               transition={{ duration: 0.8 }}
               className="absolute inset-0"
             >
-              <img 
-                src={slides[currentIndex].image} 
-                alt={slides[currentIndex].caption} 
+              <img
+                src={slides[currentIndex].image}
+                alt={slides[currentIndex].caption}
                 className="w-full h-full object-contain bg-black/10 backdrop-blur-sm"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
-                <motion.p 
+                <motion.p
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4 }}
@@ -80,13 +81,13 @@ const Slideshow = () => {
           </AnimatePresence>
 
           {/* Navigation */}
-          <button 
+          <button
             onClick={prevSlide}
             className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/40"
           >
             <ChevronLeft size={32} />
           </button>
-          <button 
+          <button
             onClick={nextSlide}
             className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/20 text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/40"
           >
@@ -99,9 +100,8 @@ const Slideshow = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-1.5 md:w-2.5 h-1.5 md:h-2.5 rounded-full transition-all ${
-                  idx === currentIndex ? 'bg-white w-4 md:w-8' : 'bg-white/50 hover:bg-white/80'
-                }`}
+                className={`w-1.5 md:w-2.5 h-1.5 md:h-2.5 rounded-full transition-all ${idx === currentIndex ? 'bg-white w-4 md:w-8' : 'bg-white/50 hover:bg-white/80'
+                  }`}
               />
             ))}
           </div>
