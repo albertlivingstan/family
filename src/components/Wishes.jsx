@@ -4,7 +4,18 @@ import { Send, Heart, Trash2, Undo2, CheckCircle2 } from 'lucide-react';
 
 const initialWishes = [
   { id: '1', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.' },
-  { id: '2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.' }
+  { id: '2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.' },
+  { id: '3', name: 'Emily', message: 'Wishing you another year of being as wonderful as you are! Happy Anniversary!' },
+  { id: '4', name: 'Uncle Bob', message: '25 years! What an amazing milestone. Wishing you all the best.' },
+  { id: '5', name: 'Cousin Jane', message: 'May your love continue to grow stronger each and every year. Cheers!' },
+  { id: '6', name: 'The Smiths', message: 'Happy anniversary! We love you guys.' },
+  { id: '7', name: 'Michael', message: 'You two are an inspiration to us all. Have a wonderful anniversary.' },
+  { id: '8', name: 'Aunt Lisa', message: 'Sending you so much love on your special day.' },
+  { id: '9', name: 'David & Family', message: 'Congratulations on 25 beautiful years together.' },
+  { id: '10', name: 'Jessica', message: 'Wishing you many more years of joy and happiness!' },
+  { id: '11', name: 'Grandma', message: 'My sweetest blessings to my favorite couple. Love you.' },
+  { id: '12', name: 'Chris & Amanda', message: 'Happy 25th! Let\'s celebrate soon.' },
+  { id: '13', name: 'Tom', message: 'A perfect pair! Happy anniversary!' }
 ];
 
 const Wishes = () => {
