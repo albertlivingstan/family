@@ -4,6 +4,19 @@ import { Send, Heart, Trash2, Undo2, Search } from 'lucide-react';
 import { db } from '../firebase';
 import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
 
+const defaultWishes = [
+  { id: 'default-1', name: 'Richard & Albert', message: 'Happy 25th Anniversary! Wishing you endless joy and love. (12:00 AM)' },
+  { id: 'default-2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.' },
+  { id: 'default-3', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.' },
+  { id: 'default-4', name: 'Emily', message: 'Wishing you another year of being as wonderful as you are! Happy Anniversary!' },
+  { id: 'default-5', name: 'Uncle Bob', message: '25 years! What an amazing milestone. Wishing you all the best.' },
+  { id: 'default-6', name: 'Cousin Jane', message: 'May your love continue to grow stronger each and every year. Cheers!' },
+  { id: 'default-7', name: 'The Smiths', message: 'Happy anniversary! We love you guys.' },
+  { id: 'default-8', name: 'Michael', message: 'You two are an inspiration to us all. Have a wonderful anniversary.' },
+  { id: 'default-9', name: 'Aunt Lisa', message: 'Sending you so much love on your special day.' },
+  { id: 'default-10', name: 'David & Family', message: 'Congratulations on 25 beautiful years together.' }
+];
+
 const Wishes = () => {
   const [wishes, setWishes] = useState([]);
   const [name, setName] = useState('');
@@ -45,8 +58,10 @@ const Wishes = () => {
     }
   };
 
+  const allWishes = [...wishes, ...defaultWishes];
+
   const handleDelete = async (id, index) => {
-    const wishToDelete = wishes.find(w => w.id === id);
+    const wishToDelete = allWishes.find(w => w.id === id);
     setLastDeleted(wishToDelete);
     setDeletedIndex(index);
     
@@ -77,7 +92,7 @@ const Wishes = () => {
     }
   };
 
-  const filteredWishes = wishes.filter(w => 
+  const filteredWishes = allWishes.filter(w => 
     w.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
     w.message.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -251,13 +266,15 @@ const Wishes = () => {
                 <div className="flex justify-between items-end">
                   <p className="text-pink-600 font-medium">— {wish.name}</p>
 
-                  <button
-                    onClick={() => handleDelete(wish.id, index)}
-                    className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all p-2 rounded-full hover:bg-red-50"
-                    title="Delete Wish"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                  {!wish.id.startsWith('default-') && (
+                    <button
+                      onClick={() => handleDelete(wish.id, index)}
+                      className="opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 transition-all p-2 rounded-full hover:bg-red-50"
+                      title="Delete Wish"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ))
