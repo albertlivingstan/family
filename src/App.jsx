@@ -11,6 +11,7 @@ import Countdown from './components/Countdown';
 import Wishes from './components/Wishes';
 import Footer from './components/Footer';
 import SlideshowPage from './pages/SlideshowPage';
+import ScrollToTop from './components/ScrollToTop';
 import { Presentation } from 'lucide-react';
 
 function MainPage() {
@@ -51,6 +52,7 @@ function MainPage() {
       <VideoSection />
       <Wishes />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

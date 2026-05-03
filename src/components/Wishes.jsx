@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Heart, Trash2, Undo2, CheckCircle2 } from 'lucide-react';
+import { Send, Heart, Trash2, Undo2, Search } from 'lucide-react';
 
 const initialWishes = [
   { id: '1', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.' },
@@ -22,6 +22,7 @@ const Wishes = () => {
   const [wishes, setWishes] = useState(initialWishes);
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const [showThankYou, setShowThankYou] = useState(false);
   const [submittedName, setSubmittedName] = useState('');
@@ -63,6 +64,11 @@ const Wishes = () => {
       setLastDeleted(null);
     }
   };
+
+  const filteredWishes = wishes.filter(w => 
+    w.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    w.message.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <section className="py-24 bg-white relative">
@@ -180,8 +186,19 @@ const Wishes = () => {
           viewport={{ once: true }}
           className="space-y-6 max-h-[700px] overflow-y-auto pr-4 relative"
         >
-          <div className="flex items-center justify-between mb-6 sticky top-0 bg-white/80 backdrop-blur-sm py-2 z-10">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 sticky top-0 bg-white/80 backdrop-blur-sm py-2 z-10 gap-4 md:gap-0">
             <h2 className="text-3xl md:text-4xl font-[var(--font-secondary)] text-gray-800">Guestbook</h2>
+            
+            <div className="relative w-full md:w-auto flex-1 md:max-w-xs md:ml-4">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search wishes..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 rounded-full border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 text-sm bg-white shadow-sm"
+              />
+            </div>
 
             <AnimatePresence>
               {lastDeleted && (
@@ -190,16 +207,25 @@ const Wishes = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   onClick={handleUndo}
-                  className="flex items-center gap-2 text-sm bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-colors shadow-lg"
+                  className="flex items-center gap-2 text-sm bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-colors shadow-lg ml-2"
                 >
-                  <Undo2 size={16} /> Undo Delete
+                  <Undo2 size={16} /> Undo
                 </motion.button>
               )}
             </AnimatePresence>
           </div>
 
           <AnimatePresence>
-            {wishes.map((wish, index) => (
+            {filteredWishes.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-10 text-gray-500 italic"
+              >
+                No wishes found matching your search.
+              </motion.div>
+            ) : (
+              filteredWishes.map((wish, index) => (
               <motion.div
                 key={wish.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -222,7 +248,8 @@ const Wishes = () => {
                   </button>
                 </div>
               </motion.div>
-            ))}
+            ))
+            )}
           </AnimatePresence>
         </motion.div>
 

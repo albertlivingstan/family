@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Masonry from 'react-masonry-css';
-import { X, Upload, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Upload, ZoomIn, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
 
 const initialPhotos = [
   { src: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.10.jpeg', caption: 'Smiling Together' },
@@ -15,6 +15,15 @@ const initialPhotos = [
 const Gallery = () => {
   const [photos, setPhotos] = useState(initialPhotos);
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [likedPhotos, setLikedPhotos] = useState({});
+
+  const toggleLike = (e, index) => {
+    e.stopPropagation();
+    setLikedPhotos(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   const handleFileUpload = (e) => {
     const files = Array.from(e.target.files);
@@ -99,7 +108,18 @@ const Gallery = () => {
                 className="w-full h-auto block transform transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center">
+              
+              {/* Like Button */}
+              <button
+                onClick={(e) => toggleLike(e, index)}
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/70 backdrop-blur-sm hover:bg-white transition-colors shadow-sm opacity-0 group-hover:opacity-100"
+              >
+                <Heart 
+                  className={`w-5 h-5 transition-colors ${likedPhotos[index] ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} 
+                />
+              </button>
+
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4 text-center pointer-events-none">
                 <ZoomIn className="text-white w-10 h-10 mb-2" />
                 <span className="text-white font-[var(--font-secondary)] font-medium text-lg drop-shadow-md">
                   {photo.caption}
