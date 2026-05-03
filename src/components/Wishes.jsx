@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Heart, Trash2, Undo2, Search } from 'lucide-react';
-
-const initialWishes = [
-  { id: '1', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.' },
-  { id: '2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.' },
-  { id: '3', name: 'Emily', message: 'Wishing you another year of being as wonderful as you are! Happy Anniversary!' },
-  { id: '4', name: 'Uncle Bob', message: '25 years! What an amazing milestone. Wishing you all the best.' },
-  { id: '5', name: 'Cousin Jane', message: 'May your love continue to grow stronger each and every year. Cheers!' },
-  { id: '6', name: 'The Smiths', message: 'Happy anniversary! We love you guys.' },
-  { id: '7', name: 'Michael', message: 'You two are an inspiration to us all. Have a wonderful anniversary.' },
-  { id: '8', name: 'Aunt Lisa', message: 'Sending you so much love on your special day.' },
-  { id: '9', name: 'David & Family', message: 'Congratulations on 25 beautiful years together.' },
-  { id: '10', name: 'Jessica', message: 'Wishing you many more years of joy and happiness!' },
-  { id: '11', name: 'Grandma', message: 'My sweetest blessings to my favorite couple. Love you.' },
-  { id: '12', name: 'Chris & Amanda', message: 'Happy 25th! Let\'s celebrate soon.' },
-  { id: '13', name: 'Tom', message: 'A perfect pair! Happy anniversary!' }
-];
+import { db } from '../firebase';
+import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
 
 const Wishes = () => {
-  const [wishes, setWishes] = useState(initialWishes);
+  const [wishes, setWishes] = useState([]);
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,26 +15,46 @@ const Wishes = () => {
   const [lastDeleted, setLastDeleted] = useState(null);
   const [deletedIndex, setDeletedIndex] = useState(-1);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const q = query(collection(db, 'wishes'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setWishes(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (name.trim() && message.trim()) {
-      const newWish = { id: Date.now().toString(), name, message };
-      setWishes([newWish, ...wishes]);
-      setSubmittedName(name);
-      setName('');
-      setMessage('');
+      try {
+        await addDoc(collection(db, 'wishes'), {
+          name,
+          message,
+          createdAt: new Date()
+        });
+        setSubmittedName(name);
+        setName('');
+        setMessage('');
 
-      // Show professional thank you message
-      setShowThankYou(true);
-      setTimeout(() => setShowThankYou(false), 6000);
+        // Show professional thank you message
+        setShowThankYou(true);
+        setTimeout(() => setShowThankYou(false), 6000);
+      } catch (error) {
+        console.error("Error adding document: ", error);
+      }
     }
   };
 
-  const handleDelete = (id, index) => {
+  const handleDelete = async (id, index) => {
     const wishToDelete = wishes.find(w => w.id === id);
     setLastDeleted(wishToDelete);
     setDeletedIndex(index);
-    setWishes(wishes.filter(w => w.id !== id));
+    
+    try {
+      await deleteDoc(doc(db, 'wishes', id));
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
 
     // Auto clear the undo option after 10 seconds
     setTimeout(() => {
@@ -56,12 +62,18 @@ const Wishes = () => {
     }, 10000);
   };
 
-  const handleUndo = () => {
+  const handleUndo = async () => {
     if (lastDeleted) {
-      const newWishes = [...wishes];
-      newWishes.splice(deletedIndex, 0, lastDeleted);
-      setWishes(newWishes);
-      setLastDeleted(null);
+      try {
+        await addDoc(collection(db, 'wishes'), {
+          name: lastDeleted.name,
+          message: lastDeleted.message,
+          createdAt: lastDeleted.createdAt || new Date()
+        });
+        setLastDeleted(null);
+      } catch (error) {
+        console.error("Error undoing delete: ", error);
+      }
     }
   };
 

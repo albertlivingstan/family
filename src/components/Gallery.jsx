@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Masonry from 'react-masonry-css';
 import { X, Upload, ZoomIn, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { db, storage } from '../firebase';
+import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const initialPhotos = [
   { src: '/image/WhatsApp%20Image%202026-05-01%20at%2009.32.10.jpeg', caption: 'Smiling Together' },
@@ -13,7 +16,7 @@ const initialPhotos = [
 ];
 
 const Gallery = () => {
-  const [photos, setPhotos] = useState(initialPhotos);
+  const [firestorePhotos, setFirestorePhotos] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [likedPhotos, setLikedPhotos] = useState({});
 
@@ -25,13 +28,34 @@ const Gallery = () => {
     }));
   };
 
-  const handleFileUpload = (e) => {
+  useEffect(() => {
+    const q = query(collection(db, 'photos'), orderBy('createdAt', 'desc'));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setFirestorePhotos(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const allPhotos = [...initialPhotos, ...firestorePhotos];
+
+  const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files);
-    const newPhotos = files.map(file => ({
-      src: URL.createObjectURL(file),
-      caption: 'A New Beautiful Memory'
-    }));
-    setPhotos(prev => [...newPhotos, ...prev]);
+    
+    for (const file of files) {
+      try {
+        const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        
+        await addDoc(collection(db, 'photos'), {
+          src: downloadURL,
+          caption: 'A New Beautiful Memory',
+          createdAt: new Date()
+        });
+      } catch (error) {
+        console.error("Error uploading file: ", error);
+      }
+    }
   };
 
   const breakpointColumnsObj = {
@@ -43,12 +67,12 @@ const Gallery = () => {
 
   const nextSlide = (e) => {
     e.stopPropagation();
-    setSelectedIndex((prev) => (prev + 1) % photos.length);
+    setSelectedIndex((prev) => (prev + 1) % allPhotos.length);
   };
 
   const prevSlide = (e) => {
     e.stopPropagation();
-    setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length);
+    setSelectedIndex((prev) => (prev - 1 + allPhotos.length) % allPhotos.length);
   };
 
   useEffect(() => {
@@ -60,7 +84,7 @@ const Gallery = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, photos.length]);
+  }, [selectedIndex, allPhotos.length]);
 
   return (
     <section className="py-20 bg-white" id="gallery">
@@ -92,7 +116,7 @@ const Gallery = () => {
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
-          {photos.map((photo, index) => (
+          {allPhotos.map((photo, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -171,8 +195,8 @@ const Gallery = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3 }}
-                  src={photos[selectedIndex].src}
-                  alt={photos[selectedIndex].caption}
+                  src={allPhotos[selectedIndex].src}
+                  alt={allPhotos[selectedIndex].caption}
                   className="max-w-full max-h-[80vh] object-contain rounded-md shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                 />
@@ -186,10 +210,10 @@ const Gallery = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <h3 className="text-white text-2xl md:text-3xl font-[var(--font-secondary)] tracking-wide">
-                  {photos[selectedIndex].caption}
+                  {allPhotos[selectedIndex].caption}
                 </h3>
                 <p className="text-white/60 mt-2 tracking-widest text-sm uppercase">
-                  {selectedIndex + 1} / {photos.length}
+                  {selectedIndex + 1} / {allPhotos.length}
                 </p>
               </motion.div>
             </div>
