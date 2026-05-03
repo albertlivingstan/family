@@ -5,15 +5,15 @@ import { db } from '../firebase';
 import { collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
 
 const defaultWishes = [
-  { id: 'default-2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.', createdAt: new Date('2026-05-03T08:30:00') },
-  { id: 'default-3', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.', createdAt: new Date('2026-05-03T09:15:00') },
-  { id: 'default-4', name: 'Emily', message: 'Wishing you another year of being as wonderful as you are! Happy Anniversary!', createdAt: new Date('2026-05-03T10:05:00') },
-  { id: 'default-5', name: 'Uncle Bob', message: '25 years! What an amazing milestone. Wishing you all the best.', createdAt: new Date('2026-05-03T10:45:00') },
-  { id: 'default-6', name: 'Cousin Jane', message: 'May your love continue to grow stronger each and every year. Cheers!', createdAt: new Date('2026-05-03T11:20:00') },
-  { id: 'default-7', name: 'The Smiths', message: 'Happy anniversary! We love you guys.', createdAt: new Date('2026-05-03T12:10:00') },
-  { id: 'default-8', name: 'Michael', message: 'You two are an inspiration to us all. Have a wonderful anniversary.', createdAt: new Date('2026-05-03T13:40:00') },
-  { id: 'default-9', name: 'Aunt Lisa', message: 'Sending you so much love on your special day.', createdAt: new Date('2026-05-03T14:25:00') },
-  { id: 'default-10', name: 'David & Family', message: 'Congratulations on 25 beautiful years together.', createdAt: new Date('2026-05-03T15:10:00') }
+  { id: 'default-2', name: 'Mom & Dad', message: 'We are so proud of the life you have built together. Happy Anniversary! Love you both.', createdAt: new Date('2026-05-02T00:00:00') },
+  { id: 'default-3', name: 'Sarah & Mark', message: 'Happy Anniversary to the most beautiful couple! Wishing you a lifetime of love and happiness.', createdAt: new Date('2026-05-02T09:15:00') },
+  { id: 'default-4', name: 'Emily', message: 'Wishing you another year of being as wonderful as you are! Happy Anniversary!', createdAt: new Date('2026-05-02T10:05:00') },
+  { id: 'default-5', name: 'Uncle Bob', message: '25 years! What an amazing milestone. Wishing you all the best.', createdAt: new Date('2026-05-02T10:45:00') },
+  { id: 'default-6', name: 'Cousin Jane', message: 'May your love continue to grow stronger each and every year. Cheers!', createdAt: new Date('2026-05-02T11:20:00') },
+  { id: 'default-7', name: 'The Smiths', message: 'Happy anniversary! We love you guys.', createdAt: new Date('2026-05-02T12:10:00') },
+  { id: 'default-8', name: 'Michael', message: 'You two are an inspiration to us all. Have a wonderful anniversary.', createdAt: new Date('2026-05-02T13:40:00') },
+  { id: 'default-9', name: 'Aunt Lisa', message: 'Sending you so much love on your special day.', createdAt: new Date('2026-05-02T14:25:00') },
+  { id: 'default-10', name: 'David & Family', message: 'Congratulations on 25 beautiful years together.', createdAt: new Date('2026-05-02T15:10:00') }
 ];
 
 const Wishes = () => {
